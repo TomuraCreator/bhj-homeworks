@@ -1,6 +1,7 @@
 .clicker__cookie {
-    margin: 50px;
-    height: 150px;
+    margin: calc(50% - 250px);
+
+
     animation-name: rotate;
     animation-duration: 5s;
     animation-iteration-count: infinite;
@@ -8,7 +9,6 @@
 }
 
 @keyframes rotate {
-    from {transform: rotate(0deg);}
-    50% {transform: rotate(180deg)}
+    from {transform: rotate(0deg)}
     to {transform: rotate(360deg)}  
 }
