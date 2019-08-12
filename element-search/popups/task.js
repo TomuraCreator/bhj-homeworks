@@ -20,8 +20,11 @@ let _io_q = function(sel) {
 _io_q('#modal_main .modal__close').addEventListener('click', ()=> _io_q('#modal_main').style.display = 'none') // 
 
 
-_io_q('#modal_success .modal__close').addEventListener('click', ()=> _io_q('#modal_success').style.display = 'none')
+_io_q('#modal_success .modal__close').addEventListener('click', ()=> {
+    _io_q('#modal_success').style.display = 'none'
+    _io_q('#modal_main').style.display = 'none'
 
+})
 
 // _io_q('.modal_close').onclick = ()=> {
 //     _io_q('.modal').style.display = 'none';
