@@ -8,11 +8,12 @@ const slider_prev = document.querySelector('.slider__arrow_prev'),
     slider__dots = document.querySelectorAll('.slider__dot');
 
 
-/*
-* @name removeMarks(parameter 1, parameter 2) - удаляет все дополнительные классы
-* @param {HTMLCollecttion}- аргумент для коллекции карточек
-* @param {HTMLCollecttion}- аргумент для коллекции точек
+/**
+ * Удаляет все дополнительные классы двух коллекций в аргументах
+ * @param 1 {Element}- аргумент для коллекции карточек
+ * @param 2 {Element}- аргумент для коллекции точек
 */
+
 function removeMarks(element, dots) {
     for(let i = 0; i < element.length; i++) {
             element[i]
@@ -22,9 +23,11 @@ function removeMarks(element, dots) {
                 .classList
                 .remove('slider__dot_active');
     }
-
-
 }
+
+/**
+ * Кликер для кнопки `slider_next`. перемещает слайд на 1 вправо.
+ */
 slider_next.addEventListener('click', function() {   
     if(num < slider__item.length-1) {
         removeMarks(slider__item, slider__dots)
@@ -47,6 +50,10 @@ slider_next.addEventListener('click', function() {
     }
     
 })
+
+/**
+ * Кликер для кнопки `slider_prev`. перемещает слайд на 1 влево.
+ */
 slider_prev.addEventListener('click', function() {   
     if (num > 0) {
         removeMarks(slider__item, slider__dots)
@@ -68,6 +75,10 @@ slider_prev.addEventListener('click', function() {
             .add('slider__dot_active');
     }  
 })
+
+/**
+ * цикл для выборки точек
+ */
 
 for(let i = 0; i < slider__dots.length; i++) {
     slider__dots[i].addEventListener('click', function() {
