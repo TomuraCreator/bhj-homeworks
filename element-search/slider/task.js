@@ -34,9 +34,7 @@ slider_next.addEventListener('click', function() {
         slider__item[num += 1]
             .classList
             .add('slider__item_active');
-        slider__dots[num]
-            .classList
-            .add('slider__dot_active');
+        
         
     } else if(num === slider__item.length - 1) {
         removeMarks(slider__item, slider__dots)
@@ -44,11 +42,11 @@ slider_next.addEventListener('click', function() {
         slider__item[num]
             .classList
             .add('slider__item_active');
-        slider__dots[num]
+        
+    }
+    slider__dots[num]
             .classList
             .add('slider__dot_active');
-    }
-    
 })
 
 /**
@@ -60,9 +58,6 @@ slider_prev.addEventListener('click', function() {
         slider__item[num -= 1]
             .classList
             .add('slider__item_active');
-        slider__dots[num]
-            .classList
-            .add('slider__dot_active');
 
     } else if(num == 0) {
         removeMarks(slider__item, slider__dots)
@@ -70,10 +65,10 @@ slider_prev.addEventListener('click', function() {
         slider__item[num]
             .classList
             .add('slider__item_active');
-        slider__dots[num]
+    }
+    slider__dots[num]
             .classList
             .add('slider__dot_active');
-    }  
 })
 
 /**
