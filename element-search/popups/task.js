@@ -1,37 +1,19 @@
-window.onload = ()=> setTimeout(()=> {
-    _io_q('#modal_main').style.display = 'block';
+//появление popup после загрузки страницы
+window.onload = ()=> setTimeout(()=> modal[0].classList.add('modal_active') , 1000)
 
-}, 1000)
+const modal = document.querySelectorAll('.modal'),
+    button = document.querySelector('.show-success'), 
+    modal__close = document.querySelectorAll('.modal__close_times');
 
-
-// хэш функция ссылки DOM елемента
-function cache(key, value) {
-    if(typeof value == 'undefined') return cache[key]
-    cache[key] = value;
-} 
-let _io_q = function(sel) {
-    if(!cache(sel)) cache(sel, document.querySelector(sel));
-    return cache(sel);
-}
-// хэш функция ссылки DOM елемента
-
-
-
-_io_q('#modal_main .modal__close').addEventListener('click', ()=> _io_q('#modal_main').style.display = 'none') // 
-
-
-_io_q('#modal_success .modal__close').addEventListener('click', ()=> {
-    _io_q('#modal_success').style.display = 'none'
-    _io_q('#modal_main').style.display = 'none'
-
+//слушатель событий на кнопку 
+button.addEventListener('click', function() {
+    modal[0].classList.remove('modal_active');
+    modal[1].classList.add('modal_active');
 })
 
-// _io_q('.modal_close').onclick = ()=> {
-//     _io_q('.modal').style.display = 'none';
-// } //объясните почему такая запись не работала если кликать на крестик в окне #modal_succes, но работала в #modal_main ?
-
-_io_q('.show-success').onclick = () => {
-    _io_q('#modal_success').style.display = 'block';
-
-
+// слушатель событий на все крестики
+for(let i = 0, b = 0; i < modal__close.length; i++, b++) {
+    modal__close[i].addEventListener('click', function() {
+        modal[i].classList.remove('modal_active');
+    })
 }

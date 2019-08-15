@@ -1,7 +1,9 @@
 window.onload = function() {
     slider__dots[num].classList.add('slider__dot_active'); 
 }
+
 let num = 0;
+
 const slider_prev = document.querySelector('.slider__arrow_prev'),
     slider_next = document.querySelector('.slider__arrow_next'),
     slider__item = document.querySelectorAll('.slider__item'),
@@ -34,15 +36,12 @@ slider_next.addEventListener('click', function() {
         slider__item[num += 1]
             .classList
             .add('slider__item_active');
-        
-        
     } else if(num === slider__item.length - 1) {
         removeMarks(slider__item, slider__dots)
         num = 0;
         slider__item[num]
             .classList
             .add('slider__item_active');
-        
     }
     slider__dots[num]
             .classList
