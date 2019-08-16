@@ -1,5 +1,4 @@
 const block = document.querySelector('.reveal');
-    
 
 window.addEventListener('scroll', ()=> {
     let block_size = block.getBoundingClientRect();
