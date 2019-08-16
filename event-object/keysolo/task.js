@@ -4,6 +4,7 @@ class Game {
     this.wordElement = container.querySelector('.word');
     this.winsElement = container.querySelector('.status__wins');
     this.lossElement = container.querySelector('.status__loss');
+    this.iter = 0;
 
     this.reset();
 
@@ -17,6 +18,16 @@ class Game {
   }
 
   registerEvents() {
+    let word = this.wordElement.childNodes;
+    setInterval(()=> {
+    }, 1000)
+      window.addEventListener('keydown', ()=> {
+        if(event.key == word[this.iter].textContent) this.success()  
+        else this.fail();
+      })
+    }
+    
+
     /*
       TODO:
       Написать обработчик события, который откликается
@@ -24,15 +35,16 @@ class Game {
       В случае правильного ввода слова вызываем this.success()
       При неправильном вводе символа - this.fail();
      */
-  }
+  
 
   success() {
     this.currentSymbol.classList.add('symbol_correct');
     this.currentSymbol = this.currentSymbol.nextElementSibling;
     if (this.currentSymbol !== null) {
+      this.iter++  
       return;
+      
     }
-
     if (++this.winsElement.textContent === 10) {
       alert('Победа!');
       this.reset();
@@ -43,15 +55,18 @@ class Game {
   fail() {
     if (++this.lossElement.textContent === 5) {
       alert('Вы проиграли!');
+      this.iter = 0;
       this.reset();
     }
+    this.iter = 0;
     this.setNewWord();
   }
 
   setNewWord() {
+    this.iter = 0;
     const word = this.getWord();
-
     this.renderWord(word);
+    
   }
 
   getWord() {
