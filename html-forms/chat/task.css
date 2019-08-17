@@ -14,6 +14,9 @@
   flex-direction: column;
   padding: 20px 5px 0 5px;
   box-sizing: border-box;
+  
+  
+
 }
 
 .chat-widget_active .chat-widget__side {
@@ -27,7 +30,11 @@
 .chat-widget__messages-container {
   flex-grow: 1;
   overflow-y: auto;
+  
 }
+::-webkit-scrollbar {
+  width: 0;
+} /*для скрытия скроллбара*/
 
 .chat-widget__side {
   position: relative;
@@ -59,7 +66,7 @@
 }
 .message_client .message__time {
   order: 2;
-  margin-right: 0;;
+  margin-right: 0;
   margin-left: 5px;
 }
 .message__text {
