@@ -1,7 +1,6 @@
 const batton_open_chat = document.querySelector('.chat-widget'), 
      message_window = document.querySelector('.chat-widget__input'), // поле ввода
     messages_container = document.querySelector('.chat-widget__messages-container'); //поле вывода чата
-let timestamps = 0;
 
 
 const praselist = [1, 'Вы кто такия, я вас не звал???', 'Тамбовский волк тебе консультант', 'Уходите', 'Я щас Антона позову!', 'Неважно, он придет и вы тут попляшете...', 'Ктобы мог подумать.', 'Я тут не работаю', 
@@ -24,7 +23,6 @@ message_window.addEventListener('keydown', function() {
         praselist[0]++; //увеличиваем счётчик
         messages_container.scrollTop = 9999; //автоскролл вниз
         if(praselist[0] == praselist.length) praselist[0] = 1 // обнуление счетчика если конец массива
-        timestamps = event.timeStamp;
     }
 })
 function createDIV(text, client = true) {
