@@ -3,6 +3,7 @@ const batton_open_chat = document.querySelector('.chat-widget'),
     messages_container = document.querySelector('.chat-widget__messages-container'); //поле вывода чата
 
 
+
 const praselist = [1, 'Вы кто такия, я вас не звал???', 'Тамбовский волк тебе консультант', 'Уходите', 'Я щас Антона позову!', 'Неважно, он придет и вы тут попляшете...', 'Ктобы мог подумать.', 'Я тут не работаю', 
     'Кто знает', 'Сидят, значит, три джуниора Русский Англичанин и Немец...', 'Лялялялялялялялялялял',
     'Смотрю на вас и вы мне не нравитесь!'] 
@@ -14,15 +15,13 @@ batton_open_chat.addEventListener('click', function() {
 
 message_window.addEventListener('keydown', function() {
     message_container_value = document.querySelector('.chat-widget__input').value;
-
+    
     if(event.key == 'Enter' && message_container_value != '' && praselist[0] !== praselist.length) {
         messages_container.append(createDIV(message_container_value)); // вставляем сформированный елемент от клиента
-        setTimeout(function() { 
-            messages_container.append(createDIV(praselist[praselist[0]], false)) // вставляем сформированный елемент, false - от бота
-        }, 700) // эмулируем интернет))
+        messages_container.append(createDIV(praselist[praselist[0]], false)) // вставляем сформированный елемент, false - от бота
         praselist[0]++; //увеличиваем счётчик
         messages_container.scrollTop = 9999; //автоскролл вниз
-        if(praselist[0] == praselist.length) praselist[0] = 1 // обнуление счетчика если конец массива
+        if(praselist[0] == praselist.length) praselist[0] = 1 // обнуление счетчика если конец массива        
     }
 })
 function createDIV(text, client = true) {
