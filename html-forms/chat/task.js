@@ -21,7 +21,9 @@ message_window.addEventListener('keydown', function() {
         messages_container.append(createDIV(praselist[praselist[0]], false)) // вставляем сформированный елемент, false - от бота
         praselist[0]++; //увеличиваем счётчик
         messages_container.scrollTop = 9999; //автоскролл вниз
-        if(praselist[0] == praselist.length) praselist[0] = 1 // обнуление счетчика если конец массива        
+        message_window.value = '';
+        if(praselist[0] == praselist.length) praselist[0] = 1; // обнуление счетчика если конец массива
+                
     }
 })
 function createDIV(text, client = true) {
