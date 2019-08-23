@@ -13,6 +13,7 @@ body {
 }
 
 .tasks__add {
+  margin-left: 5px;
   background: green;
   color: #fff;
   border: none;
