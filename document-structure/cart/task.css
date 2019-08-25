@@ -89,3 +89,9 @@ body {
 .product-shadow {
   position: absolute;
 }
+.delete {
+  position: absolute;
+  top: 0;
+  left: 72%;
+  cursor: pointer;
+}
