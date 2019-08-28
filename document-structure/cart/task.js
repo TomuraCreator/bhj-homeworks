@@ -12,7 +12,7 @@ class Cart {
         this.buttonInc = box.querySelectorAll('.product__quantity-control_inc');
         this.buttonDec = box.querySelectorAll('.product__quantity-control_dec');
         this.productAdd = box.querySelectorAll('.product__add');
-        // this.button();
+
         this.buttonIncrement();
         this.buttonDecrement();
         this.addInnBasket(this.createElement);
@@ -46,23 +46,18 @@ class Cart {
                 let data_event = event.target.closest(`.product`).dataset.id;
                 let target_event = event.target.closest(`.product`);
                 let cart = body_element.querySelector('.cart__products');
-                                
-                if(target_event) {
-                    if(cart.querySelector('.cart__product') !== null) {
-                        if (cart.contains(element)) {
-                        console.log(1, data_event, element)
-                        console.dir(element)
-
-                            // cart.children[i].lastChild.textContent = Number(target_event.querySelector('.product__quantity-value').textContent)
-                        } else {
-                            console.dir(element)
-                            console.log(1, data_event, element)
-                            cart.appendChild(create(data_event, Number(target_event.querySelector('.product__quantity-value').textContent), target_event.querySelector('img').getAttribute('src')));
-                        }
+                let value_target = target_event.querySelector('.product__quantity-value');
+                
+                if(cart.children.length !== 0) {  
+                    if(cart.querySelector(`[data-id="${data_event}"]`)) {
+                        cart.querySelector(`[data-id="${data_event}"]`).lastChild.textContent = Number(value_target.textContent)
                     } else {
-                        cart.appendChild(create(data_event, Number(target_event.querySelector('.product__quantity-value').textContent), target_event.querySelector('img').getAttribute('src')));
+                        console.log(2)
+                        cart.appendChild(create(data_event, Number(value_target.textContent), target_event.querySelector('img').getAttribute('src')));
                     }
-                } 
+                } else {
+                    cart.appendChild(create(data_event, Number(value_target.textContent), target_event.querySelector('img').getAttribute('src')));
+                }
             })
         }
     }
@@ -92,7 +87,6 @@ class Cart {
         div__data_id.appendChild(div__delete);
         div__data_id.appendChild(img);
         div__data_id.appendChild( div__data_value);
-
 
         return div__data_id;
     }
