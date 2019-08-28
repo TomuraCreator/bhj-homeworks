@@ -1,17 +1,19 @@
-const has_tooltip = document.querySelectorAll('.has-tooltip');
+const body = document.body;
 
-for (let element of has_tooltip) {
-    element.addEventListener('click', function(e) {
-        const tooltip = document.querySelector('.tooltip');
-        const clientRect = e.target.getBoundingClientRect();
-        const style_tooltip = tooltip.style; 
-        e.preventDefault();
-
-        tooltip.classList.toggle('tooltip_active');
-        
-        style_tooltip.left = clientRect.left + 'px';
-        style_tooltip.top = clientRect.bottom + 'px';
-        tooltip.textContent = e.target.getAttribute('title');
-
-    })
+body.addEventListener('click', function(e) {
+    e.preventDefault();
+    let target = e.target;
+    const clientRect = target.getBoundingClientRect();
+    if(target.classList.contains('has-tooltip')) {
+        if(target.nextElementSibling.classList.contains('tooltip_active')) deleteElement();
+        else {
+            deleteElement();
+            target.insertAdjacentHTML('afterend', `<div class="tooltip tooltip_active"
+            style="left: ${clientRect.left + 'px'}; top: ${clientRect.bottom + 'px'}">${target.getAttribute('title')}</div>`)
+        }
+    }
+})
+function deleteElement() {
+    if(document.querySelector('.tooltip_active') !== null) 
+        document.querySelector('.tooltip_active').remove();
 }
