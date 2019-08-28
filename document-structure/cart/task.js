@@ -3,84 +3,99 @@ const buttonDecrement = document.querySelectorAll('.product__quantity-control_de
 const productAdd = document.querySelectorAll('.product__add');
 
 
-for (i = 0; i < buttonIncrement.length; i++) {
-    buttonIncrement[i].addEventListener('click', function() {
-        let _target1 = event.target.closest(`[data-id="1"]`);
-        let _target2 = event.target.closest(`[data-id="2"]`);
-        if(_target1) {
-            _target1.querySelector('.product__quantity-value').textContent++
-        } else {
-            _target2.querySelector('.product__quantity-value').textContent++
-        }
-    })
-    buttonDecrement[i].addEventListener('click', function() {
-        let _target1 = event.target.closest(`[data-id="1"]`);
-        let _target2 = event.target.closest(`[data-id="2"]`);
-        if(_target1) {
-            if(_target1.querySelector('.product__quantity-value').textContent > 1) {
-                _target1.querySelector('.product__quantity-value').textContent--
-            }
-        } else {
-            if(_target2.querySelector('.product__quantity-value').textContent > 1) {
-                _target2.querySelector('.product__quantity-value').textContent--
-            }
-        }
-    })
-
-    productAdd[i].addEventListener('click', function() {
-        let _target1 = event.target.closest(`[data-id="1"]`);
-        let _target2 = event.target.closest(`[data-id="2"]`);
-        let cart = document.querySelector('.cart__products'); 
-        if(_target1) {
-            if(cart.querySelector(`[data-id="${1}"]`)) {
-                cart.querySelector('[data-id="1"]').lastChild.textContent = Number(_target1.querySelector('.product__quantity-value').textContent);
-            } else {
-                cart.appendChild(createElement( 1, Number(_target1.querySelector('.product__quantity-value').textContent), _target1.querySelector('img').getAttribute('src')));
-            }
-        } else if(_target2) {
-            if(cart.querySelector(`[data-id="${2}"]`)) {
-                cart.querySelector('[data-id="2"]').lastChild.textContent = Number(_target2.querySelector('.product__quantity-value')
-            .textContent);
-            } else {
-                cart.appendChild(createElement( 2, Number(_target2.querySelector('.product__quantity-value').textContent), _target2.querySelector('img').getAttribute('src')));
-            }
-        }
-    })
-}
-
 /**
- * Создаёт новую карточку товара
- * @param {Number} id номер добавляемого товара  
- * @param {Number} value количество товара  
- * @param {String} image адрес изображения 
+ * 
  */
-function createElement(id, value, image) {
-    let fragment = document.createDocumentFragment();
-    let div__data_id = document.createElement('div');
-    let div__data_value = document.createElement('div');
-    let img = document.createElement('img');
-    let div__delete = document.createElement('div');
+class Cart {   
+    constructor(box) {
+        this.body = box;
+        this.buttonInc = box.querySelectorAll('.product__quantity-control_inc');
+        this.buttonDec = box.querySelectorAll('.product__quantity-control_dec');
+        this.productAdd = box.querySelectorAll('.product__add');
+        // this.button();
+        this.buttonIncrement();
+        this.buttonDecrement();
+        this.addInnBasket(this.createElement);
+    }
+    buttonIncrement() {
+        for(let element of this.buttonInc) {
+            element.addEventListener('click', function(e) {
+                let target = e.target.closest(`.product`);
+                if(target) {
+                    target.querySelector('.product__quantity-value').textContent++
+                }
+            }) 
+        }    
+    }
+    buttonDecrement() {
+        for(let element of this.buttonDec) {
+            element.addEventListener('click', function(e) {
+                let target = e.target.closest(`.product`);
+                if(target) {
+                    if(target.querySelector('.product__quantity-value').textContent > 1) {
+                        target.querySelector('.product__quantity-value').textContent--
+                    }
+                }
+            }) 
+        }  
+    }
+    addInnBasket(create){
+        const body_element = this.body;
+        for(let product of this.productAdd) {
+            product.addEventListener('click', function() {
+                let data_event = event.target.closest(`.product`).dataset.id;
+                let target_event = event.target.closest(`.product`);
+                let cart = body_element.querySelector('.cart__products');
+                                
+                if(target_event) {
+                    if(cart.querySelector('.cart__product') !== null) {
+                        if (cart.contains(element)) {
+                        console.log(1, data_event, element)
+                        console.dir(element)
 
-    div__data_id.setAttribute('data-id', id);
-    div__data_id.classList.add('cart__product');
-    
-    img.setAttribute('src', image);
-    img.classList.add('cart__product-image');
+                            // cart.children[i].lastChild.textContent = Number(target_event.querySelector('.product__quantity-value').textContent)
+                        } else {
+                            console.dir(element)
+                            console.log(1, data_event, element)
+                            cart.appendChild(create(data_event, Number(target_event.querySelector('.product__quantity-value').textContent), target_event.querySelector('img').getAttribute('src')));
+                        }
+                    } else {
+                        cart.appendChild(create(data_event, Number(target_event.querySelector('.product__quantity-value').textContent), target_event.querySelector('img').getAttribute('src')));
+                    }
+                } 
+            })
+        }
+    }
+    createElement(id, value, image) {
 
-    div__data_value.classList.add('cart__product-count');
-    div__data_value.textContent = value;
+        let div__data_id = document.createElement('div');
+        let div__data_value = document.createElement('div');
+        let img = document.createElement('img');
+        let div__delete = document.createElement('div');
 
-    div__delete.classList.add('delete');
-    div__delete.setAttribute('title', 'Удалить товар');
-    div__delete.innerHTML = "&#128939";
-    div__delete.addEventListener('click', function(e){
-        e.target.closest(`.cart__product`).remove();
-    })
+        div__data_id.setAttribute('data-id', id);
+        div__data_id.classList.add('cart__product');
+        
+        img.setAttribute('src', image);
+        img.classList.add('cart__product-image');
 
-    div__data_id.appendChild(div__delete);
-    div__data_id.appendChild(img);
-    div__data_id.appendChild( div__data_value);
-    fragment.append(div__data_id);
+        div__data_value.classList.add('cart__product-count');
+        div__data_value.textContent = value;
 
-    return fragment;
+        div__delete.classList.add('delete');
+        div__delete.setAttribute('title', 'Удалить товар');
+        div__delete.innerHTML = "&#128939";
+        div__delete.addEventListener('click', function(e){
+            e.target.closest(`.cart__product`).remove();
+        })
+
+        div__data_id.appendChild(div__delete);
+        div__data_id.appendChild(img);
+        div__data_id.appendChild( div__data_value);
+
+
+        return div__data_id;
+    }
 }
+
+new Cart(document.body);
